@@ -1,0 +1,5 @@
+python-dotenv
+rich
+pydantic_ai
+mcp
+markdown
