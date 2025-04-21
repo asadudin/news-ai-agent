@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile
     container_name: news-ai-agent
     ports:
-      - "${PORT:-8000}:${PORT:-8000}"
+      - "${PORT:-8000}"
     volumes:
       # Mount .env file for configuration
       - ./.env:/app/.env:ro
