@@ -1,0 +1,30 @@
+version: '3.8'
+
+services:
+  news-ai-agent:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: news-ai-agent
+    ports:
+      - "${PORT:-8000}:${PORT:-8000}"
+    volumes:
+      # Mount .env file for configuration
+      - ./.env:/app/.env:ro
+    environment:
+      # Add any environment variables here if needed
+      - MODEL_CHOICE=${MODEL_CHOICE}
+      - BASE_URL=${BASE_URL}
+      - LLM_API_KEY=${LLM_API_KEY}
+      - BRAVE_SSE_URL=${BRAVE_SSE_URL}
+      - GHOST_SSE_URL=${GHOST_SSE_URL}
+      - HOST=${HOST:-0.0.0.0}
+      - PORT=${PORT:-8000}
+    restart: unless-stopped
+    # Ensure proper MCP server handling
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/docs"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s

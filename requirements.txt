@@ -3,3 +3,6 @@ rich
 pydantic_ai
 mcp
 markdown
+fastapi
+uvicorn
+mcp-use
