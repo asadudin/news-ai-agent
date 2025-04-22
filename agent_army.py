@@ -15,6 +15,7 @@ from datetime import datetime, timedelta, timezone
 from fastapi import FastAPI
 from pydantic import BaseModel
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 # --- Logging Setup ---
 logging.basicConfig(level=logging.INFO)
@@ -77,6 +78,15 @@ class AgentArmyContext:
 
 # ========== FastAPI App ==========
 app = FastAPI()
+
+# --- CORS Middleware ---
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Change this to a list of allowed origins in production
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 class UserInputRequest(BaseModel):
     user_input: str
